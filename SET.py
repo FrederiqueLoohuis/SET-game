@@ -1,25 +1,31 @@
-# class Kaart:
-#     aantal = 1
-#     figuur = 'rondje'
-#
-# class Spel
-#
-# class Card:
-#     Def __int__(arg)
-#
-# Self arg = random
-#     Def __ str __()
-#     Def is- Set(self, kaart1, kaart2)
-#
-# Kaart = Card (arg)
-# Kaart_is_set( … )
-#
-#
-# Class SetGame
-# Methode die alle mogelijke sets bekijkt
-# Methode: Vindt alle sets in kaarten
-# Print het naar mijn scherm
-# Methode:  vind 1 set
+'''
+Aantekeningen TA over klassen 
+Maak een klasse 'Kaart' en een klasse "spel'
+
+class Card:
+     Def __int__(arg)
+     
+     
+Self arg = random
+     Def __ str __()
+     Def is- Set(self, kaart1, kaart2)
+
+
+ Kaart = Card (arg)
+ Kaart_is_set( … )
+
+
+ Class SetGame
+ Methode die alle mogelijke sets bekijkt
+ Methode: Vindt alle sets in kaarten
+ Print het naar mijn scherm
+ Methode:  vind 1 set     
+
+class Kaart:
+     aantal = 1
+     figuur = 'rondje'
+'''
+
 
 import random
 
