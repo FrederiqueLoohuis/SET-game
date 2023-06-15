@@ -27,42 +27,28 @@ class Kaart:
 '''
 
 
-import random
+class Kaarten:
+    def __init__(self, aantal, kleur, vorm, vulling ):
+        self.aantal = aantal
+        self.kleur = kleur
+        self.vorm = vorm
+        self.vulling = vulling
 
-aantal = ["1", "2", "3"]
-kleur = ["rood", "groen", "paars"]
-vorm = ["diamant", "ovaal", "golf"]
-vulling = ["solide", "gestreept", "open"]
-test= 0
-
-def kaartengenerator(n):
-    lijst_met_kaarten = []
-
-    for i in range(1, n + 1):
-        nieuwelijst = []
-
-        nieuwelijst.append(random.choice(aantal))
-        nieuwelijst.append(random.choice(kleur))
-        nieuwelijst.append(random.choice(vorm))
-        nieuwelijst.append(random.choice(vulling))
-        lijst_met_kaarten.append(nieuwelijst)
-
-    return lijst_met_kaarten
-
-
-print(kaartengenerator(3))
-
-
-def is_set(invoer):
-    kaarten = invoer
-    truth_tabel = 4 * [True]
-    truth = []
-    for i in range(4):
-        if kaarten[0][i] != kaarten[1][i] != kaarten[2][i] and kaarten[0][i] != kaarten[2][i] or kaarten[0][i] == \
-                kaarten[1][i] == kaarten[2][i]:
-            truth.append(True)
+    def is_set(self):
+        if k1.aantal == k2.aantal !=k3.aantal or k1.aantal != k2.aantal == k1.aantal or k1.aantal == k3.aantal != k2.aantal:
+            print(False)
+        elif k1.kleur == k2.kleur !=k3.kleur or k1.kleur != k2.kleur == k1.kleur or k1.kleur == k3.kleur != k2.kleur:
+            print(False)
+        elif k1.vorm == k2.vorm !=k3.vorm or k1.vorm != k2.vorm == k1.vorm or k1.vorm == k3.vorm != k2.vorm:
+            print(False)
+        elif k1.vulling == k2.vulling !=k3.vulling or k1.vulling != k2.vulling == k1.vulling or k1.vulling == k3.vulling != k2.vulling:
+            print(False)
         else:
-            truth.append(False)
-    uitkomst = truth_tabel == truth
+            print(True)
+            
+    
+k1 = Kaarten(2,"groen", "diamant", "open")
+k2 = Kaarten(1,"paars", "driehoek", "gestreept")
+k3 = Kaarten(3,"blauw", "rondje", "solide")
 
-    return uitkomst
+k1,k2,k3.is_set()
