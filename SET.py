@@ -21,9 +21,6 @@ Self arg = random
  Print het naar mijn scherm
  Methode:  vind 1 set     
 
-class Kaart:
-     aantal = 1
-     figuur = 'rondje'
 '''
 
 class Kaart:
