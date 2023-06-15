@@ -26,30 +26,25 @@ class Kaart:
      figuur = 'rondje'
 '''
 
-
-class Kaarten:
+class Kaart:
     def __init__(self, aantal, kleur, vorm, vulling ):
-
         self.aantal = aantal
         self.kleur = kleur
         self.vorm = vorm
         self.vulling = vulling
+        self.attrs = (aantal, kleur, vorm, vulling)
 
-    def is_set(self):
-        if k1.aantal == k2.aantal != k3.aantal or k1.aantal != k2.aantal == k1.aantal or k1.aantal == k3.aantal != k2.aantal:
-            print(False)
-        elif k1.kleur == k2.kleur != k3.kleur or k1.kleur != k2.kleur == k1.kleur or k1.kleur == k3.kleur != k2.kleur:
-            print(False)
-        elif k1.vorm == k2.vorm != k3.vorm or k1.vorm != k2.vorm == k1.vorm or k1.vorm == k3.vorm != k2.vorm:
-            print(False)
-        elif k1.vulling == k2.vulling != k3.vulling or k1.vulling != k2.vulling == k1.vulling or k1.vulling == k3.vulling != k2.vulling:
-            print(False)
-        else:
-            print(True)
+    def is_set(self,k2,k3):
+        def same_or_different(attr1, attr2, attr3):
+            if attr1 == attr2 !=attr3 or attr1 != attr2 == attr3 or attr1 == attr3 != attr2:
+                return False
+            else: return True
+        for attr1,attr2,attr3 in zip(self.attrs, k2.attrs, k3.attrs):
+            if not same_or_different(attr1, attr2, attr3):
+                return False
+        return True
 
-
-k1 = Kaarten(2, "groen", "diamant", "open")
-k2 = Kaarten(1, "paars", "driehoek", "gestreept")
-k3 = Kaarten(3, "blauw", "rondje", "solide")
-
-k1, k2, k3.is_set()
+k1 = Kaart(2,"groen", "diamant", "open")
+k2 = Kaart(2,"paars", "driehoek", "gestreept")
+k3 = Kaart(2,"blauw", "rondje", "solide")
+print(k1.is_set(k2,k3))
