@@ -28,7 +28,8 @@ class Kaart:
 
 
 class Kaarten:
-    def __init__(self, aantal, kleur, vorm, vulling):
+    def __init__(self, aantal, kleur, vorm, vulling ):
+
         self.aantal = aantal
         self.kleur = kleur
         self.vorm = vorm
