@@ -33,7 +33,7 @@ aantal = ["1", "2", "3"]
 kleur = ["rood", "groen", "paars"]
 vorm = ["diamant", "ovaal", "golf"]
 vulling = ["solide", "gestreept", "open"]
-
+test= 0
 
 def kaartengenerator(n):
     lijst_met_kaarten = []
