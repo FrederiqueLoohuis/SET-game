@@ -1,47 +1,97 @@
-'''
-Aantekeningen TA over klassen 
-Maak een klasse 'Kaart' en een klasse "spel'
-
-class Card:
-     Def __int__(arg)
-     
-     
-Self arg = random
-     Def __ str __()
-     Def is- Set(self, kaart1, kaart2)
+# Enum = een set van unieke waardes die een symbolische naam hebben.
+from enum import Enum
 
 
- Kaart = Card (arg)
- Kaart_is_set( … )
+# De set kleuren die we mogen gebruiken
+class Kleur(Enum):
+    rood = 'rood'
+    groen = 'groen'
+    paars = 'paars'
 
 
- Class SetGame
- Methode die alle mogelijke sets bekijkt
- Methode: Vindt alle sets in kaarten
- Print het naar mijn scherm
- Methode:  vind 1 set     
+class Vorm(Enum):
+    diamant = 'diamant'
+    golfje = 'golfje'
+    rondje = 'rondje'
 
-'''
+
+class Vulling(Enum):
+    solide = 'solide'
+    gestreept = 'gestreept'
+    open = 'open'
+
 
 class Kaart:
-    def __init__(self, aantal, kleur, vorm, vulling ):
+    def __init__(self, aantal: int, kleur: Kleur, vorm: Vorm,
+                 vulling: Vulling):  # self = het object (dus de kaart waar het om gaat)
         self.aantal = aantal
         self.kleur = kleur
         self.vorm = vorm
         self.vulling = vulling
         self.attrs = (aantal, kleur, vorm, vulling)
 
-    def is_set(self,k2,k3):
-        def same_or_different(attr1, attr2, attr3):
-            if attr1 == attr2 !=attr3 or attr1 != attr2 == attr3 or attr1 == attr3 != attr2:
-                return False
-            else: return True
-        for attr1,attr2,attr3 in zip(self.attrs, k2.attrs, k3.attrs):
-            if not same_or_different(attr1, attr2, attr3):
-                return False
-        return True
 
-k1 = Kaart(2,"groen", "diamant", "open")
-k2 = Kaart(2,"paars", "driehoek", "gestreept")
-k3 = Kaart(2,"blauw", "rondje", "solide")
-print(k1.is_set(k2,k3))
+# de volgende functie controleert of op een kaart alle symbolen hetzelfde zijn of juist allemaal anders.
+def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
+    allemaal_zelfde = (k1.aantal == k2.aantal and k2.aantal == k3.aantal) \
+                      and (k1.kleur == k2.kleur and k2.kleur == k3.kleur) \
+                      and (k1.vorm == k2.vorm and k2.vorm == k3.vorm) \
+                      and (k1.vulling == k2.vulling and k2.vulling == k3.vulling)
+
+    allemaal_anders = (k1.aantal != k2.aantal and k1.aantal != k3.aantal and k2.aantal != k3.aantal) \
+                      and (k1.kleur != k2.kleur and k1.kleur != k3.kleur and k2.kleur != k3.kleur) \
+                      and (k1.vorm != k2.vorm and k1.vorm != k3.vorm and k2.vorm != k3.vorm) \
+                      and (k1.vulling != k2.vulling and k1.vulling != k3.vulling and k2.vulling != k3.vulling)
+
+    return allemaal_zelfde or allemaal_anders
+
+
+# alle mogelijke sets vinden in verzameling van 12 kaarten
+# 12 kies 3 = 220 mogelijke sets
+# 81 kaarten
+# 81 kies 3 = 85320
+
+def genereer_opties():
+    opties = []
+    # Nadat kaart 1 is geweest hoeven we die niet meer ergens mee te vergelijken,
+    # omdat we dat dan al in deze loop hebben gedaan
+    for kaart_index_1 in range(12):
+        for kaart_index_2 in range(kaart_index_1 + 1, 12):
+            for kaart_index_3 in range(kaart_index_2 + 1, 12):
+                opties.append((kaart_index_1, kaart_index_2, kaart_index_3))
+
+    return opties
+
+
+kies_3_uit_12_opties = genereer_opties()
+
+def vind_sets(kaarten):
+    global kies_3_uit_12_opties
+    if len(kaarten) != 12:
+        raise ValueError(f'12 kaarten verwacht, kreeg er {len(kaarten)}')
+    sets = [] # we maken een lijst om de gevonden sets in op te slaan
+
+    # we gaan door de verschillende combinaties van 3 kaarten heen
+    for (kaart_index_1, kaart_index_2, kaart_index_3) in kies_3_uit_12_opties:
+        kaart1 = kaarten[kaart_index_1]
+        kaart2 = kaarten[kaart_index_2]
+        kaart3 = kaarten[kaart_index_3]
+        if is_set(kaart1, kaart2, kaart3):
+            sets.append((kaart1, kaart2, kaart3)) # we voegen de gevonden sets toe aan de lijst sets
+
+    return sets
+
+# De volgende functie vind een enkele set
+def vind_set(kaarten):
+    global kies_3_uit_12_opties
+    if len(kaarten) != 12:
+        raise ValueError(f'12 kaarten verwacht, kreeg er {len(kaarten)}')
+    # we gaan door de verschillende combinaties van 3 kaarten heen
+    for (kaart_index_1, kaart_index_2, kaart_index_3) in kies_3_uit_12_opties:
+        kaart1 = kaarten[kaart_index_1]
+        kaart2 = kaarten[kaart_index_2]
+        kaart3 = kaarten[kaart_index_3]
+        if is_set(kaart1, kaart2, kaart3):
+            return ((kaart1, kaart2, kaart3)) # we voegen de gevonden sets toe aan de lijst sets
+
+    return None
