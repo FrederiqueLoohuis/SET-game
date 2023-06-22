@@ -1,6 +1,7 @@
 # Enum = een set van unieke waardes die een symbolische naam hebben.
 import random
 import pygame
+import math
 from enum import Enum
 
 
@@ -32,6 +33,12 @@ class Kaart:
         self.vulling = vulling
         self.attrs = (aantal, kleur, vorm, vulling)
         self.img = pygame.image.load(f'Kaarten/{kleur}{vorm}{vulling}{aantal}.gif')
+
+    def __eq__(self, other):
+        if self.attrs == other.attrs:
+            return True
+        else:
+            return False
 
 # de volgende functie controleert of op een kaart alle symbolen hetzelfde zijn of juist allemaal anders.
 def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
@@ -69,6 +76,7 @@ def genereer_opties():
 kies_3_uit_12_opties = genereer_opties()
 
 def vind_sets(kaarten):
+    math.comb(12,3)
     global kies_3_uit_12_opties
     if len(kaarten) != 12:
         raise ValueError(f'12 kaarten verwacht, kreeg er {len(kaarten)}')
@@ -103,11 +111,11 @@ def vind_set(kaarten):
 # Er zijn 81 kaarten, alle mogelijke kaarten
 def genereer_stapel():
     stapel = []
-    for kleur in range(3):
-        for aantal in range(3):
-            for vulling in range(3):
-                for vorm in range(3):
-                    kaart = (kleur, aantal, vulling, vorm)
+    for kleur in ['red', 'green', 'purple']:
+        for aantal in [1,2,3]:
+            for vulling in ['filled', 'shaded', 'empty']:
+                for vorm in ['squiggle', 'oval', 'diamond']:
+                    kaart = Kaart(aantal, kleur, vorm, vulling)
                     stapel.append(kaart)
     return stapel
 
@@ -116,13 +124,30 @@ def pop_12_kaarten():
     stapel = genereer_stapel()
     random.shuffle(stapel)
 
-    kaarten_op_tafel = []
-    while len(stapel) >= 12:
-        kaarten_op_tafel = stapel[:12]
-        stapel = stapel[12:]
+    kaarten_op_tafel = stapel[:12]
+    stapel = stapel[12:]
 
+    return kaarten_op_tafel, stapel
 
+# set = input van de user
+def vernieuw_spel(kaarten_op_tafel, stapel, set):
+    for x in set:
+        kaarten_op_tafel.remove(x)
 
+    random.shuffle(stapel)
+    kaarten_op_tafel.append(stapel[:3])
+    stapel = stapel[3:]
+    return kaarten_op_tafel, stapel
+
+    # kaarten_op_tafel = []
+    # while len(stapel) >= 12:
+    #     kaarten_op_tafel = stapel[:12]
+    #     stapel = stapel[12:]
+
+'''
+if geen set
+    verwijder bovenste 3 kaarten en vul aan met nieuwe pop_12_kaarten
+'''
 
 
 
@@ -142,3 +167,7 @@ random.shuffle
 
 # gebruik functie vind set om te kijken of er sets in de 12 kaarten zit. Zo niet, geneer nieuwe 12 kaarten.
 # totdat je set hebt of de stapel leeg is.
+
+'''
+functie die kaarten van tafel als je een set hebt gevonden en 3 nieuwe plaatst
+'''
