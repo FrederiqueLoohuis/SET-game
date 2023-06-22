@@ -4,6 +4,8 @@ import pygame
 import math
 from enum import Enum
 
+import SET
+
 
 # De set kleuren die we mogen gebruiken
 class Kleur(Enum):
@@ -118,6 +120,39 @@ def genereer_stapel():
                     kaart = Kaart(aantal, kleur, vorm, vulling)
                     stapel.append(kaart)
     return stapel
+
+# class Spel:
+#     def __init__(self):
+#         self.stapel = self.genereer_stapel()
+#         self.tafel = self.initialise_game()
+#
+#     def genereer_stapel():
+#         stapel = []
+#         for kleur in ['red', 'green', 'purple']:
+#             for aantal in [1, 2, 3]:
+#                 for vulling in ['filled', 'shaded', 'empty']:
+#                     for vorm in ['squiggle', 'oval', 'diamond']:
+#                         kaart = Kaart(aantal, kleur, vorm, vulling)
+#                         stapel.append(kaart)
+#         return stapel
+#
+#     def draw_card(self):
+#         random.shuffle(self.stapel)
+#         self.tafel.append(self.stapel[0])
+#         self.stapel.pop(0)
+#
+#     def initialise_game(self):
+#         for i in range(12):
+#             self.draw_card()
+#
+#     def vernieuw_tafel(self, set): # is invoer van de user, tenzij het niet op tijd is dan is het de invoer van de is_set
+#         for x in set:
+#             self.tafel.remove(x)
+#
+#         random.shuffle(self.stapel)
+#         self.tafel.append(self.stapel[:3])
+#         self.stapel = self.stapel[3:]
+#         return self.tafel, self.stapel
 
 
 def pop_12_kaarten():
