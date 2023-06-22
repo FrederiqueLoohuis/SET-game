@@ -1,25 +1,26 @@
 # Enum = een set van unieke waardes die een symbolische naam hebben.
 import random
+import pygame
 from enum import Enum
 
 
 # De set kleuren die we mogen gebruiken
 class Kleur(Enum):
-    rood = 'rood'
-    groen = 'groen'
-    paars = 'paars'
+    rood = 'red'
+    groen = 'green'
+    paars = 'purple'
 
 
 class Vorm(Enum):
-    diamant = 'diamant'
-    golfje = 'golfje'
-    rondje = 'rondje'
+    diamant = 'diamond'
+    golfje = 'squiggle'
+    rondje = 'oval'
 
 
 class Vulling(Enum):
-    solide = 'solide'
-    gestreept = 'gestreept'
-    open = 'open'
+    solide = 'filled'
+    gestreept = 'shaded'
+    open = 'empty'
 
 
 class Kaart:
@@ -30,7 +31,7 @@ class Kaart:
         self.vorm = vorm
         self.vulling = vulling
         self.attrs = (aantal, kleur, vorm, vulling)
-
+        self.img = pygame.image.load(f'Kaarten/{kleur}{vorm}{vulling}{aantal}.gif')
 
 # de volgende functie controleert of op een kaart alle symbolen hetzelfde zijn of juist allemaal anders.
 def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
@@ -115,12 +116,23 @@ def pop_12_kaarten():
     stapel = genereer_stapel()
     random.shuffle(stapel)
 
+    kaarten_op_tafel = []
+    while len(stapel) >= 12:
+        kaarten_op_tafel = stapel[:12]
+        stapel = stapel[12:]
+
+
+
+
+
+
+
 # uit de stapel pakken we nu 12 kaarten. De stapel bestaat nu uit het aantal kaarten dat overblijft.
-    tafel_kaarten = stapel[:12]
-    stapel = stapel[12:]
 
-    if vind_set(tafel_kaarten):
 
+async def main():
+    async with asyncio.timeout(30):
+        await long_running_task()
 
 # def pop_12_kaarten
 # uit sets van 81 kaarten >> 12 kaarten halen
