@@ -1,4 +1,5 @@
 # Enum = een set van unieke waardes die een symbolische naam hebben.
+import random
 from enum import Enum
 
 
@@ -51,6 +52,7 @@ def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
 # 81 kaarten
 # 81 kies 3 = 85320
 
+''' In de volgende functie maken we een functie die index creëert met de opties van kaart combinaties. Dus stel er zijn 12 kaarten dan berekent deze functie hoeveel combinaties van 3 kaarten je kan maken (zonder de inhoud van die kaarten te weten'''
 def genereer_opties():
     opties = []
     # Nadat kaart 1 is geweest hoeven we die niet meer ergens mee te vergelijken,
@@ -95,3 +97,36 @@ def vind_set(kaarten):
             return ((kaart1, kaart2, kaart3)) # we voegen de gevonden sets toe aan de lijst sets
 
     return None
+
+
+# Er zijn 81 kaarten, alle mogelijke kaarten
+def genereer_stapel():
+    stapel = []
+    for kleur in range(3):
+        for aantal in range(3):
+            for vulling in range(3):
+                for vorm in range(3):
+                    kaart = (kleur, aantal, vulling, vorm)
+                    stapel.append(kaart)
+    return stapel
+
+
+def pop_12_kaarten():
+    stapel = genereer_stapel()
+    random.shuffle(stapel)
+
+# uit de stapel pakken we nu 12 kaarten. De stapel bestaat nu uit het aantal kaarten dat overblijft.
+    tafel_kaarten = stapel[:12]
+    stapel = stapel[12:]
+
+    if vind_set(tafel_kaarten):
+
+
+# def pop_12_kaarten
+# uit sets van 81 kaarten >> 12 kaarten halen
+# gebruik pop, dan wordt die verwijderd.
+random.shuffle
+# genereert stapel van 81 kaarten, die schut je met random.shuffle en dan pak je 12 kaarten.
+
+# gebruik functie vind set om te kijken of er sets in de 12 kaarten zit. Zo niet, geneer nieuwe 12 kaarten.
+# totdat je set hebt of de stapel leeg is.
