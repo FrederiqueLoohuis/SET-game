@@ -57,6 +57,7 @@ def print_screen(kaarten_op_tafel, aangeklikt):
 	for coord, krt in zip(grid, kaarten_op_tafel): # zip rits twee lijsten aan elkaar
 		# print(krt)
 		if index in aangeklikt:
+			# als deze kaart aangeklikt is, geef dan de achtergrond een kleurtje
 			rechthoek = pygame.Rect(coord, (110, 220))
 			pygame.draw.rect(scrn, (0, 0, 255), rechthoek)
 		imp = krt.img
@@ -110,7 +111,11 @@ if __name__ == '__main__':
 					continue # doe er niets mee
 
 				index = row * grid_breedte + col
-				aangeklikt.add(index)
+				# als deze al aangeklikt is halen we hem uit de set van aangeklikte kaart indexen
+				if index in aangeklikt:
+					aangeklikt.remove(index)
+				else:
+					aangeklikt.add(index)
 				# print(x, y, col, row, index)
 				print(aangeklikt)
 
