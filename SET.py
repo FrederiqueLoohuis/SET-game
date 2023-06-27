@@ -44,17 +44,13 @@ class Kaart:
 
 # de volgende functie controleert of op een kaart alle symbolen hetzelfde zijn of juist allemaal anders.
 def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
-    allemaal_zelfde = (k1.aantal == k2.aantal and k2.aantal == k3.aantal) \
-                      and (k1.kleur == k2.kleur and k2.kleur == k3.kleur) \
-                      and (k1.vorm == k2.vorm and k2.vorm == k3.vorm) \
-                      and (k1.vulling == k2.vulling and k2.vulling == k3.vulling)
+    aantal_set = (k1.aantal == k2.aantal and k2.aantal == k3.aantal) or (k1.aantal != k2.aantal and k1.aantal != k3.aantal and k2.aantal != k3.aantal)
+    kleur_set = (k1.kleur == k2.kleur and k2.kleur == k3.kleur) or (k1.kleur != k2.kleur and k1.kleur != k3.kleur and k2.kleur != k3.kleur)
+    vorm_set = (k1.vorm == k2.vorm and k2.vorm == k3.vorm) or (k1.vorm != k2.vorm and k1.vorm != k3.vorm and k2.vorm != k3.vorm)
+    vulling_set = (k1.vulling == k2.vulling and k2.vulling == k3.vulling) or (k1.vulling != k2.vulling and k1.vulling != k3.vulling and k2.vulling != k3.vulling)
 
-    allemaal_anders = (k1.aantal != k2.aantal and k1.aantal != k3.aantal and k2.aantal != k3.aantal) \
-                      and (k1.kleur != k2.kleur and k1.kleur != k3.kleur and k2.kleur != k3.kleur) \
-                      and (k1.vorm != k2.vorm and k1.vorm != k3.vorm and k2.vorm != k3.vorm) \
-                      and (k1.vulling != k2.vulling and k1.vulling != k3.vulling and k2.vulling != k3.vulling)
+    return aantal_set and kleur_set and vorm_set and vulling_set
 
-    return allemaal_zelfde or allemaal_anders
 
 
 # alle mogelijke sets vinden in verzameling van 12 kaarten
