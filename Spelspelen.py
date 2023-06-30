@@ -1,45 +1,27 @@
+'''
+Door het volgende script te runnen begint het spel.
+'''
 # importing required library
 import pygame
 import SET
-'''
-Bij start spel print 12 kaarten op scherm
-schrijf functie waarbij je het spel vernieuwd >> kaarten verwijderen en nieuwe op het scherm displayen
 
-functie update_screen:
-def update_screen(kaarten_op_tafel):
-	
-
-'''
-
-# activate the pygame library .
+# activeer de pygame library .
 pygame.init()
 X = 600
 Y = 800
 
-# create the display surface object
-# of specific dimension..e(X, Y).
-# scherm object >> X en Y >> grootte van scherm
+# Hieronder creëren we de display. X en Y bepalen de grootte van het scherm
 scrn = pygame.display.set_mode((X, Y))
 
-# set the pygame window name
+# We bepalen de naam van de pygame window
 pygame.display.set_caption('image')
 
+# We creëren een klok die de tijd bijhoudt gedurende het spel.
 clock = pygame.time.Clock()
 
-# image kun je laden met load
-# create a surface object, image is drawn on it.
-# convert?
-# data set dowloaden >> setwd naar waar het staat >> image naam geven mt bijvoorbeeld groenediamantleeg
 
-# kaart = SET.Kaart(2, 'red', 'oval', 'filled')
-# imp = kaart.img
-# imp = pygame.image.load('Kaarten\greendiamondempty1.gif')
-
-# Using blit to copy content from one surface to other
-# image op scherm
-# coordinaten in pixels
-# scrn.blit(imp, (0,0))
-
+# We bepalen de coördinaten van de kaarten die op het scherm zullen verschijnen.
+# Elke cel in de grid heeft een x- en een y-coördinaat, en de positie van de cel wordt bepaald op basis van de rij- en kolomindex in de grid.
 grid_breedte = 4
 grid_hoogte = 3
 
@@ -57,6 +39,7 @@ def print_screen(kaarten_op_tafel, aangeklikt):
 	for coord, krt in zip(grid, kaarten_op_tafel): # zip rits twee lijsten aan elkaar
 		# print(krt)
 		if index in aangeklikt:
+			# als deze kaart aangeklikt is, geef dan de achtergrond een kleurtje
 			rechthoek = pygame.Rect(coord, (110, 220))
 			pygame.draw.rect(scrn, (0, 0, 255), rechthoek)
 		imp = krt.img
@@ -70,7 +53,7 @@ computer_verwijdert = True
 if __name__ == '__main__':
 	print(grid)
 
-	op_tafel, stapel = SET.pop_12_kaarten()
+	op_tafel, stapel = SET.pak_12_kaarten()
 
 	aangeklikt = set()
 
@@ -79,15 +62,10 @@ if __name__ == '__main__':
 
 	computer_countdown = computer_countdown_duur
 
-	# paint screen one time
-
-	#pygame.display.fill((0, 0, 0)) #misschien screen.fill, achtergrond kleur scherm. Kleur meegeven = tuple
-
 	status = True
 	while (status):
-	# hier in de logica van je spel zetten
-	# iterate over the list of Event objects: events is hoe je interact met je scherm, bijvoorbeeld klikken. getallen intikken = event
-	# that was returned by pygame.event.get() method.
+	# Hier itereren we over de lijst van Event objecten.
+	# Een event bepaalt hoe je interacteert met je scherm, bijvoorbeeld door kaarten aan te klikken
 		for i in pygame.event.get():
 
 			# if event object type is QUIT
@@ -110,7 +88,11 @@ if __name__ == '__main__':
 					continue # doe er niets mee
 
 				index = row * grid_breedte + col
-				aangeklikt.add(index)
+				# als deze al aangeklikt is halen we hem uit de set van aangeklikte kaart indexen
+				if index in aangeklikt:
+					aangeklikt.remove(index)
+				else:
+					aangeklikt.add(index)
 				# print(x, y, col, row, index)
 				print(aangeklikt)
 
@@ -175,5 +157,5 @@ if __name__ == '__main__':
 
 	# Spel afgelopen
 	print('Computer punten:', computer_punten, 'Jouw punten:', speler_punten)
-	# deactivates the pygame library
+	# We deactiveren de pygame library
 	pygame.quit()

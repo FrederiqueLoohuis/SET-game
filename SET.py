@@ -8,15 +8,13 @@ from enum import Enum
 
 
 '''
-We maken verschillende klassen aan voor Kleur, Vorm en Vulling. Dit doet we omdat:
-We doen dit niet voor aantal, omdat:
-De klassen die we maken zijn Enums >> dit zijn sets van unieke waardes die we een symbolische naam geven. 
-Waarom gebruiken we enums? 
+We maken verschillende klassen aan voor Kleur, Vorm en Vulling. 
+De klassen die we maken zijn Enums. Dit zijn sets van unieke waardes die we een symbolische naam geven. 
+# rood is de symbolische naam voor de waarde 'red'
 '''
-# Enum = een set van unieke waardes die een symbolische naam hebben.
-# De set kleuren die we mogen gebruiken
+
 class Kleur(Enum):
-    rood = 'red'   #rood is de symbolische naam voor de waarde 'red'
+    rood = 'red'
     groen = 'green'
     paars = 'purple'
 
@@ -35,7 +33,7 @@ class Vulling(Enum):
 
 '''
 Hieronder schrijven we de klasse Kaart. 
-de __init__ constructor gebruiken we om aan te geven wat de waardes zijn van de specifieke kaart die we initializeren
+de __init__ constructor gebruiken we om aan te geven wat de waardes zijn van de specifieke kaart die we initialiseren 
 '''
 class Kaart:
     def __init__(self, aantal: int, kleur: Kleur, vorm: Vorm,
@@ -47,15 +45,9 @@ class Kaart:
         self.attrs = (aantal, kleur, vorm, vulling)
         self.img = pygame.image.load(f'Kaarten/{kleur.value}{vorm.value}{vulling.value}{aantal}.gif')
 
-    #
-    def __eq__(self, other):
-        if self.attrs == other.attrs:
-            return True
-        else:
-            return False
-
 '''
-de volgende functie controleert of op een kaart alle symbolen hetzelfde zijn of juist allemaal anders
+de volgende functie controleert of er een set is.
+We kijken of de aantallen en de objecten van de klassen kleur, vorm en vulling voor de 3 kaarten allemaal het zelfde zijn of allemaal anders.
 '''
 def is_set(k1: Kaart, k2: Kaart, k3: Kaart):
     aantal_set = (k1.aantal == k2.aantal and k2.aantal == k3.aantal) or (k1.aantal != k2.aantal and k1.aantal != k3.aantal and k2.aantal != k3.aantal)
@@ -151,7 +143,7 @@ Hieronder schrijven we een functie die 12 random kaarten op tafel legt.
 De functie pakt steeds de bovenste kaarten van de stapel. 
 De stapel bestaat nu uit alle kaarten die onder de 12 kaarten lagen.
 '''
-def pop_12_kaarten():
+def pak_12_kaarten():
     stapel = genereer_stapel()
     random.shuffle(stapel)
 
@@ -173,10 +165,6 @@ def vernieuw_spel(kaarten_op_tafel, stapel, set: tuple):
     stapel = stapel[3:]
     return kaarten_op_tafel, stapel
 
-    # kaarten_op_tafel = []
-    # while len(stapel) >= 12:
-    #     kaarten_op_tafel = stapel[:12]
-    #     stapel = stapel[12:]
 
 
 
